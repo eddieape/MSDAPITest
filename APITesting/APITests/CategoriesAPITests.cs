@@ -129,7 +129,9 @@ namespace APITests
         }
     }
 
-
+    /// <summary>
+    /// Capture the message when the test case fails and print it to the test report
+    /// </summary>
     public class MyTestMethodAttribute : TestMethodAttribute
     {
         public override TestResult[] Execute(ITestMethod testMethod)

@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace APIServices
 {
+    /// <summary>
+    /// To manage reporting by using Extent Report
+    /// </summary>
     public static class Reporter
     {
         public static ExtentReports _extentReports;
