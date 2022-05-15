@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace APIServices.APIs
 {
+    /// <summary>
+    /// To get the details of the category by using RestApiHelper
+    /// </summary>
     public class CategoriesAPI
     {
         public string _baseUrl = "https://api.tmsandbox.co.nz";

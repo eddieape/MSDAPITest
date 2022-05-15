@@ -11,7 +11,9 @@ using System.Threading.Tasks;
 
 namespace APIServices
 {
-
+    /// <summary>
+    /// Encapsulates the Http Request operation by using RestSharp
+    /// </summary>
     public class RestApiHelper<T> where T : class, new()
     {
         public T Get(string url, object pars)
@@ -19,6 +21,12 @@ namespace APIServices
             var type = Method.GET;
             return GetApiInfo(url, pars, type);
 
+        }
+
+        public T Post(string url, object pars)
+        {
+            var type = Method.POST;
+            return GetApiInfo(url, pars, type);
         }
 
         private static T GetApiInfo(string url, object pars, Method type)

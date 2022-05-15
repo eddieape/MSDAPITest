@@ -110,15 +110,15 @@ namespace APITests
             // Arrange
             long categoryId = 6327;
             Reporter.LogToReport(Status.Info, "Test data for categoryId is: " + categoryId);
-            string categoryName = "Gallery";
-            Reporter.LogToReport(Status.Info, "Test data for the name of promotion is: " + categoryName);
+            string promotionName = "Gallery";
+            Reporter.LogToReport(Status.Info, "Test data for the name of promotion is: " + promotionName);
             string description = "Good position in category";
             Reporter.LogToReport(Status.Info, "Test data for the description of promotion contains: " + description);
             var categoriesAPI = new CategoriesAPI();
 
             // Act
             var category = categoriesAPI.GetDetailsByCategoryID(categoryId);
-            var promotion = category.Promotions.Find(item => item.Name == categoryName);
+            var promotion = category.Promotions.Find(item => item.Name == promotionName);
 
             // Assert
             Assert.IsNotNull(category);
