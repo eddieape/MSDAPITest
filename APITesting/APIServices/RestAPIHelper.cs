@@ -1,47 +1,19 @@
-﻿using Newtonsoft.Json;
+﻿using AventStack.ExtentReports;
+using Newtonsoft.Json;
 using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace APIServices
 {
-    public class RestAPIHelper<T> where T : class, new()
+
+    public class RestApiHelper<T> where T : class, new()
     {
-        private RestClient _restClient;
-        private RestRequest _restRequest;
-        //public string _baseUrl = "https://api.tmsandbox.co.nz";
-
-        public RestClient SetUrl(string baseUrl, string endpoint)
-        {
-            var url = Path.Combine(baseUrl, endpoint);
-            _restClient = new RestClient(url);
-            return _restClient;
-        }
-
-        public RestRequest CreateGetRequest()
-        {
-            _restRequest = new RestRequest(Method.GET);
-            _restRequest.AddHeader("Accept", "application/json");
-
-            return _restRequest;
-        }
-
-        public IRestResponse GetResponse(RestClient client, RestRequest request)
-        {
-            return client.Execute(request);
-        }
-
-        //public T GetContent<T>(RestResponse response)
-        //{
-        //    var content = response.Content;
-        //    T dtoObject = JsonConvert.DeserializeObject<T>(content);
-        //    return dtoObject;
-        //}
-
         public T Get(string url, object pars)
         {
             var type = Method.GET;
@@ -60,8 +32,17 @@ namespace APIServices
 
             var client = new RestClient(url);
             IRestResponse reval = client.Execute(request);
-            T dtoObject = JsonConvert.DeserializeObject<T>(reval.Content);
-            return dtoObject;
+            if (reval.IsSuccessful())
+            {
+                T dtoObject = JsonConvert.DeserializeObject<T>(reval.Content);
+                return dtoObject;
+            }
+
+            string errorInfo = $"{reval.StatusCode} response code is received, {reval.StatusDescription}";
+            Reporter.LogToReport(Status.Error, errorInfo);
+
+            return null;
         }
+    
     }
 }
