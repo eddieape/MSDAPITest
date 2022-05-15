@@ -16,7 +16,7 @@ This repo is an API testing task for the Product Test Analyst role.
 
 ### Description
 
-The solution consists of two projects, APITests and APIServices. APITests is responsible for API unit testing based on the MSTest framework, while APIServices is a class library that provides related API functions and reporting generation methods.  
+The solution consists of two projects, APITests and APIServices. APITests is responsible for API unit testing based on the MSTest framework, while APIServices is a class library that provides related API functions and reporting generation methods. The test report locates in the TestResults directory, using the browser to open the file "index.html" to view the test results.  
 
 Three Nuget packages are imported into the solution： 
 
@@ -85,4 +85,7 @@ CategoriesAPI - To get the details of the category by using RestApiHelper
       5. Check if the description of promotion contains "Good position in category"
      ```
 
----
+---  
+
+### Suggestions about the AC
+I think the HTTP status code should be verified. For example, creating a resource should return 201 CREATED, disallowed requests should return 403 FORBIDDEN, etc.  
