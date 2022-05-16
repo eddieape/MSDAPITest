@@ -1,9 +1,4 @@
 ﻿using APIServices.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APIServices.APIs
 {
@@ -12,13 +7,10 @@ namespace APIServices.APIs
     /// </summary>
     public class CategoriesAPI
     {
-        public string _baseUrl = "https://api.tmsandbox.co.nz";
-        public Category GetDetailsByCategoryID(long categoryId, bool ca=false)
+        public Category GetDetailsByCategoryID(long categoryId, bool catalogue=false)
         {
-            var restApiHelper = new RestApiHelper<Category>();
-            string url = $"{_baseUrl}/v1/Categories/{categoryId}/Details.json";
-
-            Category category =  new RestApiHelper<Category>().Get(url, new { catalogue = ca });
+            string url = $"{Constants.BASE_URL}/v1/Categories/{categoryId}/Details.json";
+            Category category =  new RestApiHelper<Category>().Get(url, new { catalogue = catalogue });
             return category;
         }
     }

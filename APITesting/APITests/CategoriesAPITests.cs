@@ -2,7 +2,6 @@
 using APIServices.APIs;
 using AventStack.ExtentReports;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 
 namespace APITests
 {
@@ -23,6 +22,7 @@ namespace APITests
         public void SetupTest()
         {
             Reporter.CreateTest(TestContext.TestName);
+            Reporter.LogToReport(Status.Info, "Test data for categoryId is: 6327");
         }
 
         [TestCleanup]
@@ -70,7 +70,6 @@ namespace APITests
         {
             // Arrange
             long categoryId = 6327;
-            Reporter.LogToReport(Status.Info, "Test data for categoryId is: " + categoryId);
             var categoriesAPI = new CategoriesAPI();
 
             // Act
@@ -78,11 +77,8 @@ namespace APITests
 
             // Assert
             Assert.IsNotNull(category);
-            Reporter.LogToReport(Status.Pass, "Get the details of category");
-
             Assert.AreEqual("Carbon credits", category.Name);
-            Reporter.LogToReport(Status.Pass, "The name of category is " + category.Name);
-
+            Reporter.LogToReport(Status.Pass, $"The name of category is '{category.Name}'");
         }
 
         [MyTestMethod]
@@ -90,7 +86,6 @@ namespace APITests
         {
             // Arrange
             long categoryId = 6327;
-            Reporter.LogToReport(Status.Info, "Test data for categoryId is: " + categoryId);
             var categoriesAPI = new CategoriesAPI();
 
             // Act
@@ -98,10 +93,8 @@ namespace APITests
 
             // Assert
             Assert.IsNotNull(category);
-            Reporter.LogToReport(Status.Pass, "Get the details of category");
-            Assert.IsTrue(category.CanRelist);
-            Reporter.LogToReport(Status.Pass, "The value of CanRelist is true");
-
+            Assert.IsTrue(category.CanRelist, $"** The 'CanRelist' should be true when category is '{categoryId}'");
+            Reporter.LogToReport(Status.Pass, "The value of 'CanRelist' is true" );
         }
 
         [MyTestMethod]
@@ -109,7 +102,7 @@ namespace APITests
         {
             // Arrange
             long categoryId = 6327;
-            Reporter.LogToReport(Status.Info, "Test data for categoryId is: " + categoryId);
+            
             string promotionName = "Gallery";
             Reporter.LogToReport(Status.Info, "Test data for the name of promotion is: " + promotionName);
             string description = "Good position in category";
